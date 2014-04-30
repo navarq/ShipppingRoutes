@@ -105,20 +105,13 @@ namespace ShippingRoutes
             {
                 if (CanContinueSearch(returnArray, currentCity.Connections[i].GetCity()))
                 {
-                    if (count == returnArray.Length)
-                    {
-                        throw new Exception("No Valid Route Found");
-                    }
-                    
-                    returnArray[count] = currentCity.Connections[i];
-
                     if (currentCity.Connections[i].GetCity().Equals(destination))
                     {
                         return returnArray[count].GetDays();
                     }
                     else
                     {
-                        if (FindNextLeg(returnArray, count + 1, destination, currentCity.Connections[i].GetCity()))
+                        if (FindNextLeg(returnArray, count + 1, destination, returnArray[i].GetCity()))
                         {
                             return returnArray[count].GetDays() + FindNextLegDistance(returnArray, count + 1, destination, currentCity.Connections[i].GetCity());
                         }
